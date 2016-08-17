@@ -1,4 +1,27 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% load l10n %}
+{% load tz %}
+
 {% block head_title %}
-    Admin Template
+Admin Template
+{% endblock %}
+
+{% block content %}
+<h2>{% trans "Content" %}</h2>
+<p>{% blocktrans %}Here goes the content...{% endblocktrans %}</p>
+<div class="col-md-4">
+  <h2 id="local-date">{{today}}</h2>
+  <p>This is the time using your local information </p>
+</div>
+<div class="col-md-4">
+  <h2 id="non-local-date">{{today|unlocalize}}</h2>
+  <p>This is the default time format.</p>
+</div>
+<div class="col-md-4">
+    <h2>Time Zones</h2>
+    <p> Quito: <span id="time-tz">{{now|time:"H:i"}}</span></p>
+    <p> UTC: <span id="time-utc">{{now|utc|time:"H:i"}}</span></p>
+    <p> New York: <span id="time-ny"> {{now|timezone:"America/New_York"|time:"H:i"}}</span></p>
+</div>
 {% endblock %}
